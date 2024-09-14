@@ -1,0 +1,51 @@
+{
+  "id": "4684723",
+  "name": "清语",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "577349",
+      "name": "朋友-fill",
+      "font_class": "pengyoufill",
+      "unicode": "e745",
+      "unicode_decimal": 59205
+    },
+    {
+      "icon_id": "15821675",
+      "name": "聊天",
+      "font_class": "liaotian",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "4510301",
+      "name": "语音2",
+      "font_class": "yuyin",
+      "unicode": "e905",
+      "unicode_decimal": 59653
+    },
+    {
+      "icon_id": "4520162",
+      "name": "发送",
+      "font_class": "fasong",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "5387522",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "eaf2",
+      "unicode_decimal": 60146
+    },
+    {
+      "icon_id": "8361833",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
+    }
+  ]
+}
