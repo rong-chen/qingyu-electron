@@ -11,14 +11,14 @@
         >
           121232
         </li>
-        <li class="chat-item" v-for="item in chatStore.ChatMessage">{{ item.message }}</li>
+        <li v-for="item in chatStore.ChatMessage" class="chat-item">{{ item.message }}</li>
       </ul>
     </div>
   </div>
 </template>
 <script setup>
 import SearchMod from '../../components/searchMod/index.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useChatMessage } from '../../store/chatMessage'
 
 const chatStore = useChatMessage()

@@ -16,7 +16,7 @@
         <div class="classify infinite-list" style="overflow: auto">
           <FriendList
             :data="classifyList"
-            :currentFriendId="currentFriendChat.ID"
+            :current-friend-id="currentFriendChat?.ID"
             @select="clickItem"
           ></FriendList>
         </div>
@@ -29,21 +29,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 // import { userStore } from '@/store/user.js'
 import chatPage from '@/components/chatPage/index.vue'
 import { getClassifyList, SearchAllFriends } from '@/api/friends.js'
 import FriendList from '@/components/FriendList.vue'
 
-let currentFriendChat = ref('')
+let currentFriendChat = ref({
+  ID: ''
+})
 const clickItem = (item) => {
   currentFriendChat.value = item.friendInfo
 }
-// const userEvent = userStore()
-const defaultProps = {
-  children: 'children',
-  label: 'label'
-}
+
 const classifyList = ref([
   {
     label: '无分类',
@@ -52,24 +50,26 @@ const classifyList = ref([
   }
 ])
 onMounted(async () => {
-  const { data, code } = await getClassifyList()
-  if (code === 0) {
-    data.forEach((item) => {
-      classifyList.value.push({
-        label: item.label,
-        id: item.id,
-        children: []
-      })
-    })
-    let res = await SearchAllFriends()
-    if (res.code === 0) {
-      classifyList.value.forEach((item, index) => {
-        item.children = res.data.filter((item2) => {
-          return item2.classifyId === item.id
+  await getClassifyList().then(async (res) => {
+    const { code, data } = res
+    if (code === 0) {
+      data.forEach((item) => {
+        classifyList.value.push({
+          label: item.label,
+          id: item.ID,
+          children: []
         })
       })
+      let res = await SearchAllFriends()
+      if (res.code === 0) {
+        classifyList.value.forEach((item, index) => {
+          item.children = res.data.filter((item2) => {
+            return item2['classifyId'] === item.id
+          })
+        })
+      }
     }
-  }
+  })
 })
 
 const copyUserId = () => {

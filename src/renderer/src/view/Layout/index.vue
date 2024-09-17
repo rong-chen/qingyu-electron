@@ -18,6 +18,7 @@
 </template>
 <script setup>
 import { useRouter } from 'vue-router'
+import { useLoadingStore } from '../../store/global'
 
 const closeWindow = () => {
   qingyu.CloseWindow('login-windows')
@@ -25,6 +26,8 @@ const closeWindow = () => {
 
 const router = useRouter()
 const iconfontClick = (name) => {
+  const loading = useLoadingStore()
+  loading.show()
   router.push({
     name
   })

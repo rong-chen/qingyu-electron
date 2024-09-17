@@ -4,12 +4,12 @@
       {{ info.nickname }}
     </div>
     <div
-      class="message-container"
       ref="messageRef"
+      class="message-container"
       style="overflow: auto; height: calc(100% - 155px)"
     >
-      <div class="content" v-for="item in chatList" :key="item.id">
-        <div class="left-message" v-show="item.sender === user.userInfo.ID">
+      <div v-for="item in chatList" :key="item.id" class="content">
+        <div v-show="item.sender === user.userInfo.ID" class="left-message">
           <el-avatar
             style="min-width: 40px; min-height: 40px"
             shape="square"
@@ -19,7 +19,7 @@
             {{ item.message }}
           </div>
         </div>
-        <div class="right-message" v-show="item.receiver === user.userInfo.ID">
+        <div v-show="item.receiver === user.userInfo.ID" class="right-message">
           <div class="message-content">
             {{ item.message }}
           </div>
@@ -41,18 +41,8 @@
   </div>
 </template>
 <script setup>
-import {
-  computed,
-  nextTick,
-  onMounted,
-  ref,
-  toRefs,
-  watch,
-  watchEffect,
-  getCurrentInstance
-} from 'vue'
+import { computed, nextTick, onMounted, ref, toRefs, watch, watchEffect } from 'vue'
 import qingyulogo from '@/assets/qinyulogo.png'
-import { ElMessage } from 'element-plus'
 import { useChatMessage } from '../../store/chatMessage'
 import { useUserStore } from '../../store/user'
 import { useSocketStore } from '../../store/websocketHandler/websocket'

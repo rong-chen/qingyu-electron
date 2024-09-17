@@ -1,6 +1,6 @@
 <template>
   <div class="friendList">
-    <el-collapse v-for="item in props.data" :key="item.id">
+    <el-collapse v-for="item in props.data" :key="item.ID">
       <el-collapse-item :name="item.id">
         <template #title>
           <div style="display: flex; width: 100%; justify-content: space-between">
@@ -9,8 +9,8 @@
           </div>
         </template>
         <template #default>
-          <div v-for="item2 in item.children">
-            <contextMenu :menu="['删除', '添加好友分类']">
+          <div v-for="item2 in item.children" :key="item2.ID">
+            <ContextMenu :menu="['删除', '添加好友分类']" @select="CtClickHandler($event, item2)">
               <div
                 class="item"
                 :class="{
@@ -20,20 +20,7 @@
               >
                 {{ item2.friendInfo.nickname ? item2.friendInfo.nickname.slice(0, 16) : '' }}
               </div>
-            </contextMenu>
-          </div>
-          <div v-for="item2 in item.children">
-            <contextMenu :menu="['删除', '添加好友分类']">
-              <div
-                class="item"
-                :class="{
-                  isActive: currentFriendId === item2.friendInfo.ID
-                }"
-                @click.stop.prevent="$emit('select', item2)"
-              >
-                {{ item2.friendInfo.nickname ? item2.friendInfo.nickname.slice(0, 16) : '' }}
-              </div>
-            </contextMenu>
+            </ContextMenu>
           </div>
         </template>
       </el-collapse-item>
@@ -43,6 +30,10 @@
 <script setup>
 import ContextMenu from './contextMenu/index.vue'
 
+const CtClickHandler = (e, item) => {
+  console.log(e)
+  console.log(item)
+}
 const props = defineProps({
   data: {
     type: Array,
